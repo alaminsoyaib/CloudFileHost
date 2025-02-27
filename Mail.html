@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stamford University Robotics Club - Registration Confirmation</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Google Sans", Roboto, Arial, sans-serif;
+        background-color: #f8f9fa;
+      }
+
+      .email-wrapper {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .circuit-border {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #004b8d 0%, #0077cc 100%);
+        padding: 30px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.15;
+      }
+
+      .header-logo {
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .header-text {
+        color: #ffffff;
+        margin: 0;
+        font-size: 28px;
+        font-weight: 600;
+        position: relative;
+        z-index: 2;
+      }
+
+      .header-subtext {
+        color: rgba(255, 255, 255, 0.9);
+        margin: 10px 0 0;
+        font-size: 16px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .content {
+        padding: 35px 30px;
+        color: #202124;
+        position: relative;
+        z-index: 2;
+      }
+
+      .greeting {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
+
+      .message {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        color: #3c4043;
+      }
+
+      .qr-section {
+        background-color: #f1f7fd;
+        border-radius: 12px;
+        padding: 30px;
+        text-align: center;
+        margin: 25px 0;
+        border-left: 4px solid #004b8d;
+        position: relative;
+      }
+
+      .qr-robot {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        width: 40px;
+        height: 40px;
+      }
+
+      .qr-code {
+        border: 8px solid white;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+        width: 200px;
+        height: 200px;
+      }
+
+      .qr-caption {
+        font-size: 15px;
+        color: #5f6368;
+        margin-top: 15px;
+      }
+
+      .details-section {
+        background-color: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 25px;
+        margin: 25px 0;
+        position: relative;
+      }
+
+      .details-heading {
+        font-size: 20px;
+        color: #004b8d;
+        margin-top: 0;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #bfdbfe;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .details-heading-icon {
+        margin-right: 10px;
+      }
+
+      .details-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .details-list li {
+        display: flex;
+        margin-bottom: 15px;
+        align-items: center;
+      }
+
+      .details-list li:last-child {
+        margin-bottom: 0;
+      }
+
+      .detail-label {
+        font-weight: 500;
+        width: 90px;
+        color: #4d5156;
+      }
+
+      .detail-value {
+        flex: 1;
+      }
+
+      .signature {
+        margin-top: 26px;
+        padding-top: 20px;
+        border-top: 1px solid #dadce0;
+      }
+
+      .signature-text {
+        margin: 5px 0;
+        color: #3c4043;
+      }
+
+      .signature-title {
+        color: #4285f4;
+        font-weight: 500;
+      }
+
+      .footer {
+        background-color: #f8f9fa;
+        color: #5f6368;
+        text-align: center;
+        padding: 20px;
+        font-size: 13px;
+        border-top: 1px solid #dadce0;
+        position: relative;
+      }
+
+      .gear-decoration {
+        position: absolute;
+        opacity: 0.1;
+      }
+
+      .gear-1 {
+        top: 10px;
+        right: 10px;
+      }
+
+      .gear-2 {
+        bottom: 10px;
+        left: 10px;
+      }
+
+      @media screen and (max-width: 480px) {
+        .header {
+          padding: 25px 15px;
+        }
+
+        .header-text {
+          font-size: 24px;
+        }
+
+        .content {
+          padding: 25px 20px;
+        }
+
+        .qr-section {
+          padding: 20px 15px;
+        }
+
+        .qr-code {
+          width: 180px;
+          height: 180px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="email-wrapper">
+      <!-- Circuit board border SVG -->
+      <div class="circuit-border">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100%" height="100%" fill="none" rx="8" ry="8" />
+          <path
+            d="M0,50 L20,50 L30,40 L50,40"
+            stroke="#004b8d"
+            stroke-width="1"
+            fill="none"
+            opacity="0.3"
+          />
+          <path
+            d="M0,150 L30,150 L40,160 L60,160"
+            stroke="#004b8d"
+            stroke-width="1"
+            fill="none"
+            opacity="0.3"
+          />
+          <path
+            d="M600,100 L580,100 L570,110 L550,110"
+            stroke="#004b8d"
+            stroke-width="1"
+            fill="none"
+            opacity="0.3"
+          />
+          <path
+            d="M600,200 L570,200 L560,190 L530,190"
+            stroke="#004b8d"
+            stroke-width="1"
+            fill="none"
+            opacity="0.3"
+          />
+          <circle cx="50" cy="40" r="4" fill="#004b8d" opacity="0.3" />
+          <circle cx="60" cy="160" r="4" fill="#004b8d" opacity="0.3" />
+          <circle cx="550" cy="110" r="4" fill="#004b8d" opacity="0.3" />
+          <circle cx="530" cy="190" r="4" fill="#004b8d" opacity="0.3" />
+        </svg>
+      </div>
+
+      <div class="header">
+        <!-- Header background pattern SVG -->
+        <div class="header-bg">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <pattern
+              id="circuit-pattern"
+              x="0"
+              y="0"
+              width="100"
+              height="100"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M10,10 L40,10 L50,20 L90,20"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+              <path
+                d="M20,30 L60,30 L70,40 L90,40"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+              <path
+                d="M10,50 L30,50 L40,60 L80,60"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+              <path
+                d="M20,70 L50,70 L60,80 L90,80"
+                stroke="white"
+                stroke-width="1"
+                fill="none"
+              />
+              <circle cx="40" cy="10" r="2" fill="white" />
+              <circle cx="90" cy="20" r="2" fill="white" />
+              <circle cx="60" cy="30" r="2" fill="white" />
+              <circle cx="90" cy="40" r="2" fill="white" />
+              <circle cx="30" cy="50" r="2" fill="white" />
+              <circle cx="80" cy="60" r="2" fill="white" />
+              <circle cx="50" cy="70" r="2" fill="white" />
+              <circle cx="90" cy="80" r="2" fill="white" />
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#circuit-pattern)" />
+          </svg>
+        </div>
+
+        <div class="header-logo">
+          <!--? Robot logo SVG -->
+          <!-- <img
+            src="https://raw.githubusercontent.com/alaminsoyaib/CloudFileHost/0f17807edb274063f301f128ce37fd7955bf4382/surc.svg"
+            alt="Stamford University Robotics Club Logo"
+          /> -->
+          <img
+            src="https://raw.githubusercontent.com/alaminsoyaib/CloudFileHost/0f17807edb274063f301f128ce37fd7955bf4382/surc.svg"
+            alt="Stamford University Robotics Club Logo"
+          />
+        </div>
+
+        <h1 class="header-text">Stamford University Robotics Club</h1>
+      </div>
+
+      <div class="content">
+        <!-- Main Content -->
+        <tr>
+          <td style="padding: 30px 20px; background: #0d1426; color: #ffffff">
+            <!-- Greeting Section - Hello name -->
+            <table cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td style="border-left: 4px solid #3b82f6; padding-left: 15px">
+                  <p style="margin: 0 0 5px; font-size: 16px; color: #3b82f6">
+                    Hello
+                  </p>
+                  <h2 style="margin: 0; font-size: 24px; color: #004b8d">
+                    Md. Al-Amin Hossain Soyaib,
+                  </h2>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Status Card - REGISTRATION CONFIRMED -->
+            <table
+              cellpadding="0"
+              cellspacing="0"
+              width="100%"
+              style="
+                margin: 25px 0;
+                background: #e0f2fe;
+                border-radius: 8px;
+                border: 1px solid #bfdbfe;
+              "
+            >
+              <tr>
+                <td style="padding: 20px">
+                  <table cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                      <td style="width: 30px; vertical-align: top">
+                        <div
+                          style="
+                            background: #2563eb;
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 50%;
+                            margin-top: 6px;
+                          "
+                        ></div>
+                      </td>
+                      <td>
+                        <p style="margin: 0; color: #2563eb; font-size: 16px">
+                          REGISTRATION CONFIRMED
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                  <p
+                    style="
+                      margin: 15px 0 0;
+                      font-size: 16px;
+                      line-height: 1.6;
+                      color: #1e293b;
+                    "
+                  >
+                    Thank you for registering for our robotics workshop! Your
+                    registration has been successfully confirmed.
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+            <!-- QR Section -->
+            <div
+              class="qr-section"
+              style="
+                background-color: #f0f9ff;
+                border-radius: 12px;
+                padding: 30px;
+                text-align: center;
+                margin: 25px 0;
+                border: 2px dashed #bfdbfe;
+              "
+            >
+              <!-- Small robot decoration at corner of QR section -->
+              <div class="qr-robot">
+                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                  <rect
+                    x="15"
+                    y="5"
+                    width="20"
+                    height="15"
+                    rx="2"
+                    fill="#004b8d"
+                    opacity="0.8"
+                  />
+                  <circle cx="22" cy="10" r="2" fill="white" />
+                  <circle cx="28" cy="10" r="2" fill="white" />
+                  <rect
+                    x="20"
+                    cy="15"
+                    width="10"
+                    height="2"
+                    rx="1"
+                    fill="white"
+                  />
+                  <rect
+                    x="20"
+                    y="20"
+                    width="10"
+                    height="15"
+                    rx="2"
+                    fill="#004b8d"
+                    opacity="0.8"
+                  />
+                  <rect
+                    x="10"
+                    y="22"
+                    width="10"
+                    height="3"
+                    rx="1"
+                    fill="#004b8d"
+                    opacity="0.8"
+                  />
+                  <rect
+                    x="30"
+                    y="22"
+                    width="10"
+                    height="3"
+                    rx="1"
+                    fill="#004b8d"
+                    opacity="0.8"
+                  />
+                  <rect
+                    x="18"
+                    y="35"
+                    width="4"
+                    height="8"
+                    rx="1"
+                    fill="#004b8d"
+                    opacity="0.8"
+                  />
+                  <rect
+                    x="28"
+                    y="35"
+                    width="4"
+                    height="8"
+                    rx="1"
+                    fill="#004b8d"
+                    opacity="0.8"
+                  />
+                </svg>
+              </div>
+
+              <img
+                class="qr-code"
+                src="https://raw.githubusercontent.com/alaminsoyaib/CloudFileHost/refs/heads/main/al.png"
+                alt="QR Code"
+                width="200"
+                height="200"
+              />
+              <p style="font-size: 15px; color: #64748b; margin-top: 15px">
+                <strong style="color: #1e293b">Registration ID: </strong
+                >51401533630186<br />
+                Please present this QR code at the entrance
+              </p>
+            </div>
+
+            <!-- Event Details -->
+            <!-- Start of Workshop Details -->
+            <div class="details-section">
+              <h2
+                class="details-heading"
+                style="
+                  color: #004b8d;
+                  margin-top: 0;
+                  margin-bottom: 20px;
+                  padding-bottom: 10px;
+                  border-bottom: 2px solid #bfdbfe;
+                  font-size: 20px;
+                  font-weight: 600;
+                  text-transform: uppercase;
+                "
+              >
+                <!-- Workshop details icon -->
+                <span class="details-heading-icon">
+                  <svg
+                    width="24"
+                    height="30"
+                    viewBox="0 -2 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      fill="none"
+                      stroke="#0f87dcc8"
+                      stroke-width="1.5"
+                    />
+                    <rect x="11" y="6" width="2" height="6" fill="#0f87dcc8" />
+                    <rect x="11" y="12" width="6" height="2" fill="#0f87dcc8" />
+                  </svg>
+                </span>
+
+                Workshop Details
+              </h2>
+              <table cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td style="text-align: center">
+                    <div
+                      style="
+                        background: #e0f2fe;
+                        padding: 15px;
+                        border-radius: 8px;
+                      "
+                    >
+                      <p
+                        style="
+                          margin: 0 0 5px;
+                          color: #2563eb;
+                          font-size: 14px;
+                          font-weight: 500;
+                        "
+                      >
+                        DATE
+                      </p>
+                      <p
+                        style="
+                          margin: 0;
+                          color: #1e293b;
+                          font-size: 18px;
+                          font-weight: 600;
+                        "
+                      >
+                        33-01-2025
+                      </p>
+                    </div>
+                  </td>
+                  <td style="text-align: center; padding: 0 10px">
+                    <div
+                      style="
+                        background: #e0f2fe;
+                        padding: 15px;
+                        border-radius: 8px;
+                      "
+                    >
+                      <p
+                        style="
+                          margin: 0 0 5px;
+                          color: #2563eb;
+                          font-size: 14px;
+                          font-weight: 500;
+                        "
+                      >
+                        TIME
+                      </p>
+                      <p
+                        style="
+                          margin: 0;
+                          color: #1e293b;
+                          font-size: 18px;
+                          font-weight: 600;
+                        "
+                      >
+                        11:00 AM
+                      </p>
+                    </div>
+                  </td>
+                  <td style="text-align: center">
+                    <div
+                      style="
+                        background: #e0f2fe;
+                        padding: 15px;
+                        border-radius: 8px;
+                      "
+                    >
+                      <p
+                        style="
+                          margin: 0 0 5px;
+                          color: #2563eb;
+                          font-size: 14px;
+                          font-weight: 500;
+                        "
+                      >
+                        VENUE
+                      </p>
+                      <p
+                        style="
+                          margin: 0;
+                          color: #1e293b;
+                          font-size: 18px;
+                          font-weight: 600;
+                        "
+                      >
+                        AUDITORIUM
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Gear decorations in the details section -->
+              <div class="gear-decoration gear-1">
+                <svg
+                  width="60"
+                  height="60"
+                  viewBox="0 0 120 120"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M60,25 L65,25 L67,35 L73,36 L78,28 L82,30 L80,40 L85,43 L92,38 L95,42 L88,50 L90,55 L100,53 L101,58 L90,62 L90,68 L100,72 L99,77 L90,75 L85,80 L92,87 L88,90 L80,85 L75,87 L77,97 L72,98 L70,88 L65,88 L63,98 L58,97 L60,87 L55,85 L48,90 L45,87 L50,80 L45,75 L35,77 L33,72 L43,68 L43,62 L33,58 L35,53 L45,55 L50,50 L45,42 L48,38 L55,43 L60,40 L58,30 Z"
+                    fill="#004b8d"
+                  />
+                  <circle cx="60" cy="60" r="10" fill="white" />
+                </svg>
+              </div>
+
+              <div class="gear-decoration gear-2">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 120 120"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M60,25 L65,25 L67,35 L73,36 L78,28 L82,30 L80,40 L85,43 L92,38 L95,42 L88,50 L90,55 L100,53 L101,58 L90,62 L90,68 L100,72 L99,77 L90,75 L85,80 L92,87 L88,90 L80,85 L75,87 L77,97 L72,98 L70,88 L65,88 L63,98 L58,97 L60,87 L55,85 L48,90 L45,87 L50,80 L45,75 L35,77 L33,72 L43,68 L43,62 L33,58 L35,53 L45,55 L50,50 L45,42 L48,38 L55,43 L60,40 L58,30 Z"
+                    fill="#004b8d"
+                  />
+                  <circle cx="60" cy="60" r="10" fill="white" />
+                </svg>
+              </div>
+            </div>
+            <!-- End of Workshop Details -->
+
+            <!-- Additional Info -->
+            <p
+              style="
+                margin: 0 0 15px;
+                font-size: 16px;
+                color: #64748b;
+                line-height: 1.6;
+              "
+            >
+              ✦ If you have any questions or need further assistance, don't
+              hesitate to get in touch with us via our Facebook page inbox.
+            </p>
+          </td>
+        </tr>
+        <div
+          style="
+            margin-top: 26px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+          "
+        >
+          <p
+            style="
+              margin: 15px 0 0;
+              font-size: 16px;
+              line-height: 1.6;
+              color: #1e293b;
+            "
+          >
+            Best regards,<br />
+            Md. Al-Amin Hossain Soyaib<br />
+            CO-PRS, Stamford University Robotics Club
+          </p>
+        </div>
+      </div>
+
+      <div
+        style="
+          background-color: #004b8d;
+          color: #ffffff;
+          text-align: center;
+          padding: 20px;
+          font-size: 13px;
+        "
+      >
+        © 2025 Stamford University Robotics Club. All rights reserved.<br />
+      </div>
+    </div>
+  </body>
+</html>
